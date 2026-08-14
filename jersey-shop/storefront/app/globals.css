@@ -1,0 +1,549 @@
+/* ============================================
+   NINETY KITS — Design System (Light Theme)
+   Premium Jersey E-Commerce for Bangladesh
+   ============================================ */
+
+/* --- Google Fonts --- */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800;900&display=swap');
+
+/* --- CSS Custom Properties (Design Tokens) --- */
+:root {
+  /* Primary Palette */
+  --color-bg: #FFFFFF;
+  --color-bg-alt: #F7F8FA;
+  --color-bg-subtle: #F0F2F5;
+  --color-bg-card: #FFFFFF;
+
+  /* Accent Colors */
+  --color-emerald: #00A855;
+  --color-emerald-glow: #00C964;
+  --color-emerald-dark: #008844;
+  --color-emerald-light: #E6F9F0;
+  --color-gold: #E5A100;
+  --color-gold-light: #FFF3D6;
+
+  /* Neutral */
+  --color-white: #FFFFFF;
+  --color-black: #0A1628;
+  --color-text: #1A1F2E;
+  --color-text-muted: #5A6478;
+  --color-text-faint: #8A94A6;
+  --color-border: rgba(0, 0, 0, 0.08);
+  --color-border-hover: rgba(0, 0, 0, 0.15);
+
+  /* Glass Effects (light mode) */
+  --glass-bg: rgba(255, 255, 255, 0.85);
+  --glass-bg-hover: rgba(255, 255, 255, 0.95);
+  --glass-border: rgba(0, 0, 0, 0.06);
+  --glass-blur: 20px;
+
+  /* Gradients */
+  --gradient-primary: linear-gradient(135deg, var(--color-emerald), var(--color-emerald-dark));
+  --gradient-gold: linear-gradient(135deg, var(--color-gold), #D49200);
+  --gradient-hero: linear-gradient(180deg, #F7F8FA 0%, #FFFFFF 100%);
+  --gradient-card: linear-gradient(145deg, rgba(0,0,0,0.01) 0%, rgba(0,0,0,0.03) 100%);
+  --gradient-text: linear-gradient(135deg, var(--color-emerald), var(--color-gold));
+
+  /* Typography */
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-heading: 'Outfit', 'Inter', sans-serif;
+
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 1.875rem;
+  --text-4xl: 2.25rem;
+  --text-5xl: 3rem;
+  --text-6xl: 3.75rem;
+  --text-7xl: 4.5rem;
+
+  --font-light: 300;
+  --font-regular: 400;
+  --font-medium: 500;
+  --font-semibold: 600;
+  --font-bold: 700;
+  --font-extrabold: 800;
+
+  /* Spacing */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+  --space-24: 6rem;
+
+  /* Border Radius (Puma Flagship Standard: Sharp 2px Athletic Corners) */
+  --radius-sm: 2px;
+  --radius-md: 2px;
+  --radius-lg: 2px;
+  --radius-xl: 2px;
+  --radius-2xl: 2px;
+  --radius-full: 9999px;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 16px 40px rgba(0, 0, 0, 0.12);
+  --shadow-glow-emerald: 0 4px 20px rgba(0, 168, 85, 0.2);
+  --shadow-glow-gold: 0 4px 20px rgba(229, 161, 0, 0.2);
+
+  /* Transitions */
+  --transition-fast: 150ms ease;
+  --transition-base: 250ms ease;
+  --transition-slow: 400ms ease;
+  --transition-spring: 500ms cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* Layout */
+  --container-max: 1280px;
+  --container-padding: var(--space-6);
+  --navbar-height: 72px;
+}
+
+/* --- Reset & Base --- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  font-weight: var(--font-regular);
+  line-height: 1.6;
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* --- Global Mouse Text Selection --- */
+::selection {
+  background: #00A855;
+  color: #FFFFFF;
+}
+
+::-moz-selection {
+  background: #00A855;
+  color: #FFFFFF;
+}
+
+/* Dark Background Selection: Pure White with Pitch Black Text */
+footer ::selection,
+nav ::selection,
+header ::selection,
+[class*="hero"] ::selection,
+[class*="marquee"] ::selection,
+[class*="customStudio"] ::selection,
+[class*="dark"] ::selection {
+  background: #FFFFFF;
+  color: #000000;
+}
+
+footer ::-moz-selection,
+nav ::-moz-selection,
+header ::-moz-selection,
+[class*="hero"] ::-moz-selection,
+[class*="marquee"] ::-moz-selection,
+[class*="customStudio"] ::-moz-selection,
+[class*="dark"] ::-moz-selection {
+  background: #FFFFFF;
+  color: #000000;
+}
+
+/* --- Focus & Interaction Defaults --- */
+:focus-visible {
+  outline: 2px solid #000000;
+  outline-offset: 2px;
+}
+
+button, a, input, select, textarea {
+  transition: all var(--transition-fast);
+}
+
+button:active, 
+.btn:active, 
+.shopNowBtn:active, 
+.actionBtn:active {
+  transform: scale(0.98);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+a:hover {
+  color: #000000;
+}
+
+/* --- Typography --- */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: var(--font-bold);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: var(--color-black);
+}
+
+h1 { font-size: var(--text-5xl); }
+h2 { font-size: var(--text-4xl); }
+h3 { font-size: var(--text-3xl); }
+h4 { font-size: var(--text-2xl); }
+h5 { font-size: var(--text-xl); }
+h6 { font-size: var(--text-lg); }
+
+/* --- Container --- */
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--container-padding);
+}
+
+/* --- Glass Card --- */
+.glass-card {
+  background: var(--color-bg-card);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  transition: all var(--transition-base);
+  box-shadow: var(--shadow-sm);
+}
+
+.glass-card:hover {
+  border-color: var(--color-border-hover);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* --- Buttons (Puma Flagship Standard) --- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: 10px 24px;
+  font-family: var(--font-heading);
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  border-radius: 2px;
+  transition: all var(--transition-fast);
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background: #000000;
+  color: #FFFFFF;
+  border: 1px solid #000000;
+}
+
+.btn-primary:hover {
+  background: #FFFFFF;
+  color: #000000;
+  border-color: #000000;
+}
+
+.btn-secondary {
+  background: #FFFFFF;
+  color: #000000;
+  border: 1px solid #000000;
+}
+
+.btn-secondary:hover {
+  background: #000000;
+  color: #FFFFFF;
+  border-color: #000000;
+}
+
+.btn-emerald {
+  background: var(--color-emerald);
+  color: #FFFFFF;
+  border: 1px solid var(--color-emerald);
+}
+
+.btn-emerald:hover {
+  background: #008844;
+  color: #FFFFFF;
+}
+
+.btn-gold {
+  background: #000000;
+  color: #FFFFFF;
+  border: 1px solid #000000;
+}
+
+.btn-gold:hover {
+  background: #FFFFFF;
+  color: #000000;
+}
+
+.btn-outline {
+  background: transparent;
+  color: #000000;
+  border: 1px solid #CBD5E1;
+}
+
+.btn-outline:hover {
+  border-color: #000000;
+  color: #000000;
+}
+
+.btn-sm {
+  padding: 6px 14px;
+  font-size: 11px;
+}
+
+.btn-lg {
+  padding: 14px 32px;
+  font-size: 13px;
+}
+
+.btn-block {
+  width: 100%;
+}
+
+/* --- Badges --- */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 8px;
+  font-family: var(--font-heading);
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  border-radius: 2px;
+  background: #000000;
+  color: #FFFFFF;
+}
+
+.badge-emerald {
+  background: var(--color-emerald);
+  color: #FFFFFF;
+}
+
+.badge-gold {
+  background: var(--color-gold);
+  color: #000000;
+  font-weight: 900;
+}
+
+/* --- Price Tag --- */
+.price {
+  font-family: var(--font-heading);
+  font-weight: var(--font-bold);
+  color: var(--color-emerald);
+}
+
+.price-currency {
+  font-size: 0.7em;
+  margin-right: 2px;
+}
+
+.price-original {
+  color: var(--color-text-faint);
+  text-decoration: line-through;
+  font-size: 0.85em;
+  font-weight: var(--font-regular);
+}
+
+/* --- Grid --- */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--space-6);
+}
+
+/* --- Skeleton Loader --- */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.skeleton {
+  background: linear-gradient(90deg, var(--color-bg-subtle) 25%, var(--color-bg-alt) 50%, var(--color-bg-subtle) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s ease-in-out infinite;
+  border-radius: var(--radius-md);
+}
+
+/* --- Scrollbar --- */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg-alt);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: var(--radius-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-text-faint);
+}
+
+/* --- Animations --- */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 10px rgba(0, 168, 85, 0.15); }
+  50% { box-shadow: 0 0 25px rgba(0, 168, 85, 0.35); }
+}
+
+@keyframes floatSlow {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes shimmerSweep {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes pulseDotLive {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(0, 168, 85, 0.6);
+  }
+  70% {
+    transform: scale(1.05);
+    box-shadow: 0 0 0 8px rgba(0, 168, 85, 0);
+  }
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(0, 168, 85, 0);
+  }
+}
+
+.animate-float {
+  animation: floatSlow 4s ease-in-out infinite;
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.4s ease-out forwards;
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Staggered animations */
+.stagger-1 { animation-delay: 0.08s; }
+.stagger-2 { animation-delay: 0.16s; }
+.stagger-3 { animation-delay: 0.24s; }
+.stagger-4 { animation-delay: 0.32s; }
+.stagger-5 { animation-delay: 0.40s; }
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+  :root {
+    --container-padding: var(--space-4);
+    --navbar-height: 64px;
+  }
+
+  h1 { font-size: var(--text-3xl); }
+  h2 { font-size: var(--text-2xl); }
+  h3 { font-size: var(--text-xl); }
+
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-3);
+  }
+}
+
+@media (max-width: 480px) {
+  .product-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* --- Selection Color --- */
+::selection {
+  background: rgba(0, 168, 85, 0.15);
+  color: var(--color-black);
+}
+

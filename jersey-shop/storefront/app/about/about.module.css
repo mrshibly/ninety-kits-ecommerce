@@ -1,0 +1,228 @@
+/* About Page Styles (Puma Sportswear Aesthetic) */
+
+.page {
+  padding-bottom: var(--space-20);
+  background: #FFFFFF;
+}
+
+.heroSection {
+  padding: var(--space-16) 0 var(--space-12);
+  background: #F8FAFC;
+  border-bottom: 1px solid #E2E8F0;
+  text-align: center;
+}
+
+.heroContent {
+  max-width: 680px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.brandBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  background: #000000;
+  color: #FFFFFF;
+  border-radius: 2px;
+  font-family: var(--font-heading);
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.title {
+  font-family: var(--font-heading);
+  font-size: clamp(2.2rem, 4vw, 3.25rem);
+  font-weight: 900;
+  color: #000000;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+}
+
+.desc {
+  font-size: 15px;
+  color: #64748B;
+  line-height: 1.7;
+}
+
+/* Values Grid */
+.valuesSection {
+  padding: var(--space-16) 0;
+}
+
+.valuesGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-8);
+}
+
+.valueCard {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-8);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.iconCircle {
+  width: 52px;
+  height: 52px;
+  border-radius: var(--radius-md);
+  background: var(--color-emerald-light);
+  color: var(--color-emerald);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.valueCard h3 {
+  font-size: var(--text-lg);
+  color: var(--color-black);
+}
+
+.valueCard p {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  line-height: 1.6;
+}
+
+/* Contact Card */
+.contactSection {
+  padding: var(--space-8) 0;
+}
+
+.contactCard {
+  background: linear-gradient(135deg, #0A1628 0%, #1A2A45 100%);
+  color: var(--color-white);
+  border-radius: var(--radius-xl);
+  padding: var(--space-12);
+  box-shadow: var(--shadow-xl);
+}
+
+.contactDetails {
+  max-width: 620px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.contactLabel {
+  font-size: var(--text-xs);
+  font-weight: var(--font-bold);
+  text-transform: uppercase;
+  color: var(--color-gold);
+  letter-spacing: 0.05em;
+}
+
+.contactDetails h2 {
+  font-size: var(--text-3xl);
+  color: var(--color-white);
+}
+
+.contactDetails p {
+  color: #CBD5E1;
+  font-size: var(--text-sm);
+  line-height: 1.6;
+}
+
+.contactList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin-top: var(--space-2);
+}
+
+.contactItem {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-size: var(--text-sm);
+  color: #E2E8F0;
+}
+
+.itemIcon {
+  color: var(--color-emerald-glow);
+  flex-shrink: 0;
+}
+
+/* FAQ Section */
+.faqSection {
+  padding: var(--space-16) 0;
+  background: var(--color-bg-alt);
+  border-top: 1px solid var(--color-border);
+}
+
+.faqHeader {
+  text-align: center;
+  margin-bottom: var(--space-10);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.faqHeader h2 {
+  font-size: var(--text-3xl);
+  color: var(--color-black);
+}
+
+.faqList {
+  max-width: 720px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.faqItem {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.faqQuestion {
+  width: 100%;
+  padding: var(--space-5) var(--space-6);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: left;
+  font-family: var(--font-heading);
+  font-size: var(--text-base);
+  font-weight: var(--font-bold);
+  color: var(--color-black);
+  cursor: pointer;
+}
+
+.chevron {
+  color: var(--color-text-faint);
+  flex-shrink: 0;
+}
+
+.faqAnswer {
+  padding: 0 var(--space-6) var(--space-5);
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  line-height: 1.7;
+}
+
+@media (max-width: 860px) {
+  .valuesGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .contactCard {
+    padding: var(--space-8);
+  }
+}

@@ -1,0 +1,36 @@
+# Environment files
+.env
+.env*.local
+backend.env
+common.env
+!backend.env.example
+
+# Node.js
+node_modules/
+**/node_modules/
+.next/
+**/.next/
+out/
+.vercel
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+
+# IDE & OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# Logs
+*.log
+npm-debug.log*
+
+# Backup files
+*.bak

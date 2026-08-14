@@ -1,0 +1,251 @@
+/* =========================================================
+   FOOTER STYLES — PUMA MINIMALIST LUXURY
+   Pitch Black (#000000)
+   ========================================================= */
+
+.footer {
+  background: #000000;
+  color: #FFFFFF;
+  padding: var(--space-16) 0 var(--space-8);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  font-family: var(--font-body);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr 1fr 1.2fr;
+  gap: var(--space-10);
+  padding-bottom: var(--space-12);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Brand Column */
+.brandCol {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  color: #FFFFFF;
+}
+
+.logoBadge {
+  width: 26px;
+  height: 26px;
+  border-radius: 2px;
+  background: #00A855;
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logoText {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  font-weight: 900;
+  letter-spacing: 0.05em;
+  color: #FFFFFF;
+}
+
+.brandDesc {
+  font-size: 12.5px;
+  color: #94A3B8;
+  line-height: 1.6;
+  max-width: 280px;
+}
+
+.socialRow {
+  display: flex;
+  gap: var(--space-3);
+  margin-top: var(--space-2);
+}
+
+.socialLink {
+  width: 32px;
+  height: 32px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #CBD5E1;
+  transition: all var(--transition-fast);
+}
+
+.socialLink:hover {
+  background: #FFFFFF;
+  color: #000000;
+  border-color: #FFFFFF;
+}
+
+/* Nav Columns */
+.navCol {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.heading {
+  font-family: var(--font-heading);
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #FFFFFF;
+  margin-bottom: var(--space-2);
+}
+
+.link {
+  font-size: 13px;
+  color: #94A3B8;
+  text-decoration: none;
+  transition: color var(--transition-fast);
+  width: fit-content;
+}
+
+.link:hover {
+  color: #FFFFFF;
+}
+
+/* Newsletter Column */
+.newsletterCol {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.newsletterText {
+  font-size: 12.5px;
+  color: #94A3B8;
+  line-height: 1.5;
+}
+
+.inlineForm {
+  display: flex;
+  align-items: center;
+  background: #0D141C;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-top: var(--space-1);
+}
+
+.inlineForm:focus-within {
+  border-color: #FFFFFF;
+}
+
+.input {
+  flex: 1;
+  padding: 10px 12px;
+  background: transparent;
+  border: none;
+  color: #FFFFFF;
+  font-size: 12.5px;
+  outline: none;
+}
+
+.input::placeholder {
+  color: #64748B;
+}
+
+.submitBtn {
+  width: 40px;
+  height: 38px;
+  background: #FFFFFF;
+  border: none;
+  color: #000000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background var(--transition-fast);
+}
+
+.submitBtn:hover {
+  background: #00A855;
+  color: #FFFFFF;
+}
+
+.successBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: #00A855;
+  font-weight: 700;
+  margin-top: 4px;
+}
+
+/* Bottom Bar */
+.bottomBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: var(--space-6);
+  flex-wrap: wrap;
+  gap: var(--space-4);
+}
+
+.bottomLeft {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+}
+
+.countryPill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 2px;
+  font-family: var(--font-heading);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  color: #FFFFFF;
+}
+
+.copyright {
+  font-family: var(--font-heading);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: #64748B;
+}
+
+.payments {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  opacity: 0.9;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 1024px) {
+  .grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+  }
+
+  .bottomBar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-4);
+  }
+}

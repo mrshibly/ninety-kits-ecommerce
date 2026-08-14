@@ -1,0 +1,1411 @@
+/* =========================================================
+   ADMIN OPERATIONS CONTROL CENTER — PUMA FLAGSHIP STANDARD
+   Minimalist, High-Contrast, Tabular Operations Powerhouse
+   ========================================================= */
+
+.adminLayout {
+  min-height: 100vh;
+  background: #F8FAFC;
+  padding-bottom: var(--space-20);
+  font-family: var(--font-body);
+}
+
+/* =========================================================
+   HEADER CANOPY (PUMA FLAGSHIP DEDICATED ADMIN BAR)
+   ========================================================= */
+.adminHeaderBar {
+  background: #000000;
+  color: #FFFFFF;
+  padding: 16px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.adminHeaderContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.adminBrand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  text-decoration: none;
+  color: #FFFFFF;
+}
+
+.adminBrandBadge {
+  width: 36px;
+  height: 36px;
+  border-radius: 2px;
+  background: #00A855;
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 12px rgba(0, 168, 85, 0.4);
+}
+
+.adminBrandText {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.adminTitleRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.adminBrandName {
+  font-family: var(--font-heading);
+  font-size: 15px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #FFFFFF;
+}
+
+.adminBadgeLive {
+  font-family: var(--font-heading);
+  font-size: 9.5px;
+  font-weight: 900;
+  color: #00A855;
+  background: rgba(0, 168, 85, 0.15);
+  border: 1px solid rgba(0, 168, 85, 0.3);
+  padding: 1px 6px;
+  border-radius: 2px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.adminEnvTag {
+  font-size: 11px;
+  color: #94A3B8;
+  letter-spacing: 0.02em;
+}
+
+.adminUserActions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.headerPrimaryBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  background: #FFFFFF;
+  color: #000000;
+  font-family: var(--font-heading);
+  font-size: 11.5px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  border-radius: 2px;
+  border: 1px solid #FFFFFF;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.headerPrimaryBtn:hover {
+  background: #000000;
+  color: #FFFFFF;
+}
+
+.headerOutlineBtn {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 16px;
+  background: transparent;
+  color: #FFFFFF;
+  font-family: var(--font-heading);
+  font-size: 11.5px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  border-radius: 2px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  text-decoration: none;
+  transition: all var(--transition-fast);
+}
+
+.headerOutlineBtn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: #FFFFFF;
+}
+
+.headerSignOutBtn {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 16px;
+  background: transparent;
+  color: #FF3B5C;
+  font-family: var(--font-heading);
+  font-size: 11.5px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  border-radius: 2px;
+  border: 1px solid rgba(255, 59, 92, 0.4);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.headerSignOutBtn:hover {
+  background: #FF3B5C;
+  color: #FFFFFF;
+  border-color: #FF3B5C;
+}
+
+/* =========================================================
+   KPI METRIC CARDS
+   ========================================================= */
+.kpiGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-4);
+  margin-top: var(--space-8);
+  margin-bottom: var(--space-8);
+}
+
+.kpiCard {
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 2px;
+  padding: var(--space-5) var(--space-6);
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+  transition: border-color var(--transition-fast), transform var(--transition-fast);
+}
+
+.kpiCard:hover {
+  border-color: #000000;
+  transform: translateY(-2px);
+}
+
+.kpiIconBox {
+  width: 44px;
+  height: 44px;
+  border-radius: 2px;
+  background: #000000;
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.kpiIconGold {
+  background: #000000;
+  color: #E5A100;
+}
+
+.kpiIconWarning {
+  background: #000000;
+  color: #FF3B5C;
+}
+
+.kpiIconEmerald {
+  background: #000000;
+  color: #00A855;
+}
+
+.kpiLabel {
+  font-family: var(--font-heading);
+  font-size: 11px;
+  font-weight: 800;
+  color: #64748B;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  display: block;
+}
+
+.kpiValue {
+  font-family: var(--font-heading);
+  font-size: 1.65rem;
+  font-weight: 900;
+  color: #000000;
+  letter-spacing: -0.02em;
+  margin-top: 2px;
+  display: block;
+}
+
+/* =========================================================
+   ADMIN TABS (Athletic Black Active Pills)
+   ========================================================= */
+.adminTabs {
+  display: flex;
+  gap: var(--space-2);
+  margin-bottom: var(--space-6);
+  border-bottom: 2px solid #E2E8F0;
+  padding-bottom: 0px;
+  flex-wrap: wrap;
+}
+
+.adminTabBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  font-family: var(--font-heading);
+  font-size: 12px;
+  font-weight: 800;
+  color: #475569;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-bottom: none;
+  border-top-left-radius: 2px;
+  border-top-right-radius: 2px;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.adminTabBtn:hover {
+  color: #000000;
+  background: #F1F5F9;
+}
+
+.adminTabActive {
+  color: #FFFFFF !important;
+  background: #000000 !important;
+  border-color: #000000 !important;
+  font-weight: 900;
+}
+
+.tabBadge {
+  background: rgba(0, 0, 0, 0.1);
+  color: inherit;
+  font-size: 10px;
+  font-weight: 800;
+  padding: 2px 6px;
+  border-radius: 2px;
+}
+
+.adminTabActive .tabBadge {
+  background: #FFFFFF;
+  color: #000000;
+}
+
+/* =========================================================
+   DATA TABLE STYLES & CELL FORMATTING
+   ========================================================= */
+.tableCard {
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 2px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+}
+
+.tableHeader {
+  padding: 16px 24px;
+  background: #FFFFFF;
+  border-bottom: 1px solid #E2E8F0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+.tableHeader h3 {
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  font-weight: 900;
+  color: #000000;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+}
+
+.tableHeader span {
+  font-size: 12px;
+  color: #64748B;
+  display: block;
+  margin-top: 2px;
+}
+
+.tableWrapper {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.table th {
+  background: #000000;
+  color: #FFFFFF;
+  padding: 12px 18px;
+  font-family: var(--font-heading);
+  font-size: 11px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border: none;
+  white-space: nowrap;
+}
+
+.table td {
+  padding: 14px 18px;
+  border-bottom: 1px solid #F1F5F9;
+  font-size: 13px;
+  color: #1E293B;
+  vertical-align: top;
+}
+
+.table td strong {
+  display: block;
+  font-family: var(--font-heading);
+  font-size: 13.5px;
+  font-weight: 800;
+  color: #000000;
+  margin-bottom: 3px;
+}
+
+.subText {
+  display: block;
+  font-size: 12px;
+  color: #64748B;
+  margin-top: 2px;
+  line-height: 1.4;
+}
+
+.orderIdCell strong {
+  font-family: var(--font-heading);
+  font-size: 13.5px;
+  font-weight: 900;
+  color: #000000;
+}
+
+.customBadgeText {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 7px;
+  background: #F8FAFC;
+  border: 1px solid #CBD5E1;
+  border-radius: 2px;
+  font-family: var(--font-heading);
+  font-size: 11px;
+  font-weight: 800;
+  color: #00A855;
+  margin-top: 4px;
+}
+
+/* Status Badges */
+.statusBadge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 9px;
+  border-radius: 2px;
+  font-family: var(--font-heading);
+  font-size: 10.5px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+
+.badgeDelivered {
+  background: #00A855;
+  color: #FFFFFF;
+}
+
+.badgeDispatched {
+  background: #000000;
+  color: #FFFFFF;
+}
+
+.badgePrinting {
+  background: #000000;
+  color: #00A855;
+  border: 1px solid #00A855;
+}
+
+.badgePending {
+  background: #E5A100;
+  color: #000000;
+}
+
+/* Action Button Group */
+.actionBtnGroup {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: nowrap;
+}
+
+.actionBtnConfirm,
+.actionBtnPrint,
+.actionBtnDispatch,
+.actionBtnDeliver {
+  padding: 6px 12px;
+  background: #000000;
+  color: #FFFFFF;
+  font-family: var(--font-heading);
+  font-size: 10.5px;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border-radius: 2px;
+  border: 1px solid #000000;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+}
+
+.actionBtnConfirm:hover,
+.actionBtnPrint:hover,
+.actionBtnDispatch:hover,
+.actionBtnDeliver:hover {
+  background: #FFFFFF;
+  color: #000000;
+}
+
+.actionBtnDelete {
+  width: 28px;
+  height: 28px;
+  border-radius: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #FFFFFF;
+  border: 1px solid #CBD5E1;
+  color: #FF3B5C;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  flex-shrink: 0;
+}
+
+.actionBtnDelete:hover {
+  background: #FF3B5C;
+  color: #FFFFFF;
+  border-color: #FF3B5C;
+}
+
+/* Inventory Tab Badges & Steppers */
+.editionPill {
+  display: inline-block;
+  padding: 2px 7px;
+  background: #F1F5F9;
+  border: 1px solid #E2E8F0;
+  border-radius: 2px;
+  font-family: var(--font-heading);
+  font-size: 10.5px;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: #475569;
+}
+
+.stockStatusPill {
+  display: inline-block;
+  padding: 3px 8px;
+  border-radius: 2px;
+  font-family: var(--font-heading);
+  font-size: 10.5px;
+  font-weight: 800;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.stockGood {
+  background: #EBFDF5;
+  color: #00A855;
+  border: 1px solid rgba(0, 168, 85, 0.2);
+}
+
+.stockLow {
+  background: #FFF1F2;
+  color: #FF3B5C;
+  border: 1px solid rgba(255, 59, 92, 0.2);
+}
+
+.stockAdjustGroup {
+  display: inline-flex;
+  gap: 4px;
+}
+
+.stockBtn {
+  padding: 4px 8px;
+  background: #FFFFFF;
+  border: 1px solid #CBD5E1;
+  border-radius: 2px;
+  font-family: var(--font-heading);
+  font-size: 11px;
+  font-weight: 900;
+  color: #000000;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.stockBtn:hover {
+  background: #000000;
+  color: #FFFFFF;
+  border-color: #000000;
+}
+
+.crudActionGroup {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.editBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 5px 12px;
+  background: #000000;
+  color: #FFFFFF;
+  font-family: var(--font-heading);
+  font-size: 11px;
+  font-weight: 900;
+  text-transform: uppercase;
+  border-radius: 2px;
+  border: 1px solid #000000;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.editBtn:hover {
+  background: #FFFFFF;
+  color: #000000;
+}
+
+.deleteBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 5px 10px;
+  background: #FFFFFF;
+  border: 1px solid #CBD5E1;
+  color: #FF3B5C;
+  font-family: var(--font-heading);
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.deleteBtn:hover {
+  background: #FF3B5C;
+  color: #FFFFFF;
+  border-color: #FF3B5C;
+}
+
+/* Voucher Code Badge */
+.voucherCodeBadge {
+  display: inline-block;
+  padding: 4px 9px;
+  background: #F8FAFC;
+  border: 1px solid #000000;
+  border-radius: 2px;
+  font-family: var(--font-heading);
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  color: #000000;
+}
+
+.toggleStatusBtn {
+  padding: 4px 10px;
+  border-radius: 2px;
+  font-family: var(--font-heading);
+  font-size: 10.5px;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: all var(--transition-fast);
+}
+
+.toggleActive {
+  background: #00A855;
+  color: #FFFFFF;
+}
+
+.toggleInactive {
+  background: #64748B;
+  color: #FFFFFF;
+}
+
+/* =========================================================
+   TAB 2: PRINTING QUEUE CARDS
+   ========================================================= */
+.printingQueueGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: var(--space-6);
+  padding: var(--space-6);
+}
+
+.printingCard {
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 2px;
+  padding: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+}
+
+.printingCardTop {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.printOrderId {
+  font-family: var(--font-heading);
+  font-size: 13px;
+  font-weight: 900;
+  color: #000000;
+}
+
+.printKitTitle {
+  font-size: 12px;
+  color: #64748B;
+}
+
+.printCanvasMockup {
+  height: 140px;
+  background: #0D141C;
+  border: 1px solid #00A855;
+  border-radius: 2px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+.mockupName {
+  font-family: var(--font-heading);
+  font-size: 14px;
+  font-weight: 900;
+  letter-spacing: 0.15em;
+  color: #FFFFFF;
+  text-transform: uppercase;
+}
+
+.mockupNumber {
+  font-family: var(--font-heading);
+  font-size: 3rem;
+  font-weight: 900;
+  line-height: 1;
+  color: #00A855;
+}
+
+.printSpecsRow {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 11px;
+  color: #64748B;
+  border-top: 1px solid #F1F5F9;
+  padding-top: 8px;
+}
+
+/* =========================================================
+   TAB 3: COD VERIFICATION CARDS
+   ========================================================= */
+.codList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding: var(--space-6);
+}
+
+.codCard {
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 2px;
+  padding: var(--space-5) var(--space-6);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+}
+
+.codDetails h4 {
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  font-weight: 900;
+  color: #000000;
+  margin-bottom: 4px;
+}
+
+.codDetails p {
+  font-size: 12.5px;
+  color: #475569;
+  margin: 2px 0;
+}
+
+.codActions {
+  display: flex;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+
+/* =========================================================
+   MODAL DIALOGS
+   ========================================================= */
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: var(--space-4);
+}
+
+.modalContent {
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 2px;
+  max-width: 600px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: var(--space-8);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+}
+
+.modalHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: var(--space-4);
+  border-bottom: 1px solid #E2E8F0;
+}
+
+.modalTitleGroup {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.modalTitleGroup h3 {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  font-weight: 900;
+  color: #000000;
+  text-transform: uppercase;
+}
+
+.closeModalBtn {
+  color: #64748B;
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  transition: color var(--transition-fast);
+}
+
+.closeModalBtn:hover {
+  color: #000000;
+}
+
+/* Modal Form Layout */
+.modalForm {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.formRow2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-4);
+}
+
+.formRow3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-3);
+}
+
+.formField {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+}
+
+.formField label {
+  font-family: var(--font-heading);
+  font-size: 11px;
+  font-weight: 800;
+  color: #000000;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.modalInput,
+.modalSelect {
+  width: 100%;
+  padding: 10px 12px;
+  background: #FFFFFF;
+  border: 1px solid #CBD5E1;
+  border-radius: 2px;
+  font-size: 13px;
+  color: #000000;
+  outline: none;
+  transition: border-color var(--transition-fast);
+}
+
+.modalInput:focus,
+.modalSelect:focus,
+.modalTextarea:focus {
+  border-color: #000000;
+}
+
+.modalTextarea {
+  width: 100%;
+  padding: 10px 12px;
+  background: #FFFFFF;
+  border: 1px solid #CBD5E1;
+  border-radius: 2px;
+  font-size: 13px;
+  font-family: inherit;
+  color: #000000;
+  outline: none;
+  resize: vertical;
+}
+
+/* =========================================================
+   JERSEY IMAGE SELECTOR & PREVIEW SYSTEM
+   ========================================================= */
+.imageSelectorBox {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 14px;
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  border-radius: 2px;
+}
+
+.imageSelectorHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.imageHelpText {
+  font-size: 11px;
+  color: #64748B;
+}
+
+.imageConfigRow {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  gap: var(--space-4);
+  align-items: center;
+}
+
+.imagePreviewWrap {
+  width: 100px;
+  height: 100px;
+  background: #FFFFFF;
+  border: 1px solid #CBD5E1;
+  border-radius: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.imagePreviewThumb {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 4px;
+}
+
+.imagePreviewPlaceholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  color: #94A3B8;
+  font-size: 10px;
+  font-family: var(--font-heading);
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.imageControlsColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.presetButtonsRow {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+
+.presetBtn {
+  padding: 4px 8px;
+  background: #FFFFFF;
+  border: 1px solid #CBD5E1;
+  border-radius: 2px;
+  font-family: var(--font-heading);
+  font-size: 10.5px;
+  font-weight: 800;
+  color: #000000;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+}
+
+.presetBtn:hover {
+  background: #F1F5F9;
+  border-color: #000000;
+}
+
+.presetBtnActive {
+  background: #000000 !important;
+  color: #FFFFFF !important;
+  border-color: #000000 !important;
+}
+
+.imageInputsRow {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.fileUploadBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 14px;
+  background: #000000;
+  color: #FFFFFF;
+  font-family: var(--font-heading);
+  font-size: 11px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-radius: 2px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all var(--transition-fast);
+  border: 1px solid #000000;
+}
+
+.fileUploadBtn:hover {
+  background: #FFFFFF;
+  color: #000000;
+}
+
+.modalFooter {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: var(--space-3);
+  margin-top: var(--space-4);
+  padding-top: var(--space-4);
+  border-top: 1px solid #E2E8F0;
+}
+
+/* =========================================================
+   HERO BANNER & CAMPAIGN MANAGER STYLES (TAB 6)
+   ========================================================= */
+.successToastBar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #00A855;
+  color: #FFFFFF;
+  padding: 12px 16px;
+  border-radius: 2px;
+  font-family: var(--font-heading);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-bottom: var(--space-4);
+}
+
+.heroManagerLayout {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: var(--space-6);
+  align-items: start;
+}
+
+.heroMockupCard {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.mockupCardLabel {
+  font-family: var(--font-heading);
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  color: #64748B;
+  text-transform: uppercase;
+}
+
+.heroPreviewFrame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 2px;
+  overflow: hidden;
+  background: #000000;
+  border: 1px solid #CBD5E1;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.heroPreviewImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.heroPreviewPlaceholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #64748B;
+  font-size: 14px;
+}
+
+.heroPreviewOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.85) 0%,
+    rgba(0, 0, 0, 0.4) 50%,
+    rgba(0, 0, 0, 0.1) 100%
+  );
+}
+
+.heroPreviewContent {
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+  right: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  color: #FFFFFF;
+}
+
+.heroMockBadge {
+  align-self: flex-start;
+  background: #00A855;
+  color: #FFFFFF;
+  font-family: var(--font-heading);
+  font-size: 8px;
+  font-weight: 900;
+  padding: 2px 6px;
+  border-radius: 2px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.heroMockTitle {
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  font-weight: 900;
+  line-height: 1.1;
+  text-transform: uppercase;
+  color: #FFFFFF;
+  margin: 0;
+}
+
+.heroMockSub {
+  font-size: 9px;
+  font-weight: 700;
+  color: #E2E8F0;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.heroMockBtnRow {
+  display: flex;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.heroMockBtn {
+  padding: 4px 8px;
+  background: #FFFFFF;
+  color: #000000;
+  font-family: var(--font-heading);
+  font-size: 8px;
+  font-weight: 900;
+  border-radius: 2px;
+  text-transform: uppercase;
+}
+
+.heroControlsCard {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .kpiGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .kpiGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .tableHeader {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+/* =========================================================
+   ADMIN AUTH / LOGIN PAGE STYLES
+   ========================================================= */
+.adminLoginPage {
+  min-height: 85vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #F8FAFC;
+  padding: var(--space-12) 0;
+}
+
+.adminAuthCard {
+  max-width: 480px;
+  width: 100%;
+  margin: 0 auto;
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 2px;
+  padding: var(--space-10) var(--space-8);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+}
+
+.adminHeader {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.adminLogoBox {
+  width: 52px;
+  height: 52px;
+  border-radius: 2px;
+  background: #000000;
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2px;
+}
+
+.adminBadgeRow {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-heading);
+  font-size: 10.5px;
+  font-weight: 800;
+  color: #00A855;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.adminTitle {
+  font-family: var(--font-heading);
+  font-size: 1.85rem;
+  font-weight: 900;
+  color: #000000;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.adminSub {
+  font-size: 13px;
+  color: #64748B;
+  line-height: 1.5;
+}
+
+.errorAlert {
+  background: #FEF2F2;
+  border: 1px solid #F87171;
+  color: #DC2626;
+  padding: var(--space-3);
+  border-radius: 2px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.adminForm {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+}
+
+.field label {
+  font-family: var(--font-heading);
+  font-size: 11px;
+  font-weight: 800;
+  color: #000000;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.input {
+  width: 100%;
+  padding: 12px 14px;
+  background: #FFFFFF;
+  border: 1px solid #CBD5E1;
+  border-radius: 2px;
+  font-size: 13.5px;
+  color: #000000;
+  outline: none;
+  transition: border-color var(--transition-fast);
+}
+
+.input:focus {
+  border-color: #000000;
+}
+
+.adminSubmitBtn {
+  width: 100%;
+  padding: 12px;
+  background: #000000;
+  color: #FFFFFF;
+  font-family: var(--font-heading);
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-radius: 2px;
+  border: 1px solid #000000;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  margin-top: var(--space-2);
+}
+
+.adminSubmitBtn:hover {
+  background: #FFFFFF;
+  color: #000000;
+}
+
+.demoAdminBox {
+  background: #F8FAFC;
+  border: 1px dashed #CBD5E1;
+  border-radius: 2px;
+  padding: 14px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.demoAdminLabel {
+  font-family: var(--font-heading);
+  font-size: 10.5px;
+  font-weight: 800;
+  color: #64748B;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.demoAdminBtn {
+  padding: 9px 14px;
+  background: #FFFFFF;
+  border: 1px solid #000000;
+  color: #000000;
+  font-family: var(--font-heading);
+  font-size: 11px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.demoAdminBtn:hover {
+  background: #000000;
+  color: #FFFFFF;
+}
+
+.adminFooter {
+  text-align: center;
+  padding-top: var(--space-2);
+}
+
+.backLink {
+  font-family: var(--font-heading);
+  font-size: 12.5px;
+  font-weight: 800;
+  color: #64748B;
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+.backLink:hover {
+  color: #000000;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}

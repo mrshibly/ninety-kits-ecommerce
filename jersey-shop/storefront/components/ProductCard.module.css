@@ -1,0 +1,292 @@
+.cardWrapper {
+  position: relative;
+  display: flex;
+  height: 100%;
+}
+
+.card {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 2px;
+  overflow: hidden;
+  transition: transform var(--transition-fast), border-color var(--transition-fast);
+  position: relative;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  border-color: #000000;
+}
+
+/* Top Actions */
+.topActions {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  right: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.badgesCol {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: flex-start;
+}
+
+.highlightBadge {
+  background: #000000;
+  color: #FFFFFF;
+  font-family: var(--font-heading);
+  font-size: 9.5px;
+  font-weight: 900;
+  padding: 3px 8px;
+  border-radius: 2px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.discountBadge {
+  background: #000000;
+  color: #FFFFFF;
+  font-family: var(--font-heading);
+  font-size: 9.5px;
+  font-weight: 900;
+  padding: 3px 7px;
+  border-radius: 2px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  text-transform: uppercase;
+}
+
+.customBadge {
+  background: #000000;
+  color: #FFFFFF;
+  font-family: var(--font-heading);
+  font-size: 9px;
+  font-weight: 900;
+  padding: 2px 6px;
+  border-radius: 2px;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.wishlistBtn {
+  pointer-events: auto;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-full);
+  background: #FFFFFF;
+  border: 1px solid #CBD5E1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #64748B;
+  transition: all var(--transition-fast);
+}
+
+.wishlistBtn:hover {
+  color: #FF3B5C;
+  border-color: #000000;
+}
+
+.wishedActive {
+  color: #FF3B5C !important;
+  background: #FFF0F2;
+  border-color: #FFB8C2;
+}
+
+/* Image */
+.imageLink {
+  display: block;
+  text-decoration: none;
+  background: #F8FAFC;
+}
+
+.imageContainer {
+  position: relative;
+  aspect-ratio: 3 / 3.8;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+.image {
+  width: 85%;
+  height: 85%;
+  object-fit: contain;
+  transition: transform var(--transition-slow);
+}
+
+.card:hover .image {
+  transform: scale(1.05);
+}
+
+/* Details */
+.details {
+  padding: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 6px;
+}
+
+.categoryRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 11px;
+}
+
+.leagueTag {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  color: #64748B;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 11px;
+}
+
+.ratingBox {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.ratingVal {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: 12px;
+  color: #000000;
+}
+
+.reviewNum {
+  color: #94A3B8;
+  font-size: 10.5px;
+}
+
+.titleLink {
+  text-decoration: none;
+}
+
+.title {
+  font-family: var(--font-heading);
+  font-size: 14.5px;
+  font-weight: 900;
+  color: #000000;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  transition: color var(--transition-fast);
+}
+
+.title:hover {
+  color: #00A855;
+}
+
+.teamName {
+  font-family: var(--font-heading);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #64748B;
+}
+
+/* Sizes */
+.sizesRow {
+  display: flex;
+  gap: 4px;
+  margin-top: 2px;
+}
+
+.sizeChip {
+  font-family: var(--font-heading);
+  font-size: 10px;
+  font-weight: 800;
+  color: #000000;
+  background: #F8FAFC;
+  border: 1px solid #CBD5E1;
+  padding: 2px 6px;
+  border-radius: 2px;
+}
+
+/* Bottom Row */
+.bottomRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+  padding-top: var(--space-3);
+  border-top: 1px solid #F1F5F9;
+}
+
+.priceCol {
+  display: flex;
+  flex-direction: column;
+}
+
+.priceMain {
+  display: flex;
+  align-items: baseline;
+  color: #000000;
+  font-family: var(--font-heading);
+  font-weight: 900;
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
+.currency {
+  font-size: 14px;
+  margin-right: 2px;
+}
+
+.amount {
+  font-size: 1.2rem;
+}
+
+.priceOriginal {
+  font-family: var(--font-heading);
+  font-size: 11px;
+  font-weight: 700;
+  color: #94A3B8;
+  text-decoration: line-through;
+  margin-top: 2px;
+}
+
+.actionBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 14px;
+  background: #000000;
+  color: #FFFFFF;
+  font-family: var(--font-heading);
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-radius: 2px;
+  text-decoration: none;
+  transition: all var(--transition-fast);
+  border: 1px solid #000000;
+}
+
+.actionBtn:hover {
+  background: #FFFFFF;
+  color: #000000;
+}

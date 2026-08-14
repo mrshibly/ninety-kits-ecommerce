@@ -1,0 +1,168 @@
+.bannerWrapper {
+  width: 100%;
+  position: relative;
+  z-index: 1002;
+  background: #000000;
+}
+
+/* 1. Thin Top Utility Strip */
+.topUtilityStrip {
+  background: #000000;
+  color: #94A3B8;
+  font-family: var(--font-heading);
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  padding: 6px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  text-transform: uppercase;
+}
+
+.utilityContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+
+.leftMessage {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #FFFFFF;
+}
+
+.accentIcon {
+  color: #00A855;
+}
+
+.rightLinks {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.utilityLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: #CBD5E1;
+  font-size: 11px;
+  font-weight: 700;
+  transition: color var(--transition-fast);
+}
+
+.utilityLink:hover {
+  color: #FFFFFF;
+}
+
+.pipe {
+  color: rgba(255, 255, 255, 0.2);
+  font-size: 10px;
+}
+
+.langSwitch {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 2px 8px;
+  border-radius: 2px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.langBtn {
+  background: none;
+  border: none;
+  color: #94A3B8;
+  font-family: var(--font-heading);
+  font-size: 10.5px;
+  font-weight: 800;
+  cursor: pointer;
+  padding: 1px 2px;
+  transition: color var(--transition-fast);
+}
+
+.langBtn:hover {
+  color: #FFFFFF;
+}
+
+.langActive {
+  color: #FFFFFF !important;
+  font-weight: 900;
+}
+
+.langSlash {
+  color: rgba(255, 255, 255, 0.3);
+  font-size: 10px;
+}
+
+/* 2. Secondary High-Impact Sports Promo Bar (Seamless Luxury Dark Theme) */
+.secondaryPromoBar {
+  background: #0D141C;
+  color: #FFFFFF;
+  padding: 7px 0;
+  text-align: center;
+  font-family: var(--font-heading);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.promoLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  text-decoration: none;
+  font-size: 11.5px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #FFFFFF;
+  transition: opacity var(--transition-fast);
+}
+
+.promoLink:hover {
+  opacity: 0.85;
+}
+
+.promoHighlight {
+  font-weight: 900;
+  color: #FFFFFF;
+}
+
+.promoSuffix {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  font-size: 11px;
+  font-weight: 800;
+  color: #00A855;
+}
+
+.promoArrow {
+  transition: transform var(--transition-fast);
+  color: #00A855;
+}
+
+.promoLink:hover .promoArrow {
+  transform: translateX(3px);
+}
+
+@media (max-width: 768px) {
+  .hideMobile {
+    display: none !important;
+  }
+
+  .leftMessage {
+    font-size: 10px;
+  }
+
+  .secondaryPromoBar {
+    padding: 5px 0;
+  }
+
+  .promoLink {
+    font-size: 10.5px;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+}

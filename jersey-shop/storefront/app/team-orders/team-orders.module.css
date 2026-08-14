@@ -1,0 +1,375 @@
+/* Team Orders Roster Builder Styles (Puma Sportswear Aesthetic) */
+
+.page {
+  padding-bottom: var(--space-20);
+  background: #FFFFFF;
+}
+
+.hero {
+  padding: var(--space-14) 0 var(--space-10);
+  background: #F8FAFC;
+  border-bottom: 1px solid #E2E8F0;
+  text-align: center;
+  margin-bottom: var(--space-8);
+}
+
+.heroContent {
+  max-width: 680px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.teamBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  background: #000000;
+  color: #FFFFFF;
+  border-radius: 2px;
+  font-family: var(--font-heading);
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.title {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  font-weight: 900;
+  color: #000000;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+}
+
+.desc {
+  font-size: 14px;
+  color: #64748B;
+  line-height: 1.6;
+}
+
+/* Tier Grid */
+.tierGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-4);
+  margin-bottom: var(--space-8);
+}
+
+.tierCard {
+  background: #FFFFFF;
+  border: 1px solid #CBD5E1;
+  border-radius: 2px;
+  padding: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  text-align: center;
+  transition: all var(--transition-fast);
+}
+
+.tierCount {
+  font-family: var(--font-heading);
+  font-size: 11px;
+  font-weight: 800;
+  color: #64748B;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.tierCard strong {
+  font-family: var(--font-heading);
+  font-size: 14px;
+  font-weight: 900;
+  color: #000000;
+  text-transform: uppercase;
+}
+
+.tierCard span:last-child {
+  font-size: 11px;
+  color: #64748B;
+}
+
+.tierActive {
+  border-color: #000000 !important;
+  background: #000000 !important;
+}
+
+.tierActive .tierCount,
+.tierActive span:last-child {
+  color: #CBD5E1 !important;
+}
+
+.tierActive strong {
+  color: #FFFFFF !important;
+}
+
+/* Layout */
+.layout {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: var(--space-8);
+  align-items: start;
+}
+
+/* Setup Card */
+.setupCard {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-6);
+  margin-bottom: var(--space-6);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.setupCard h3 {
+  font-size: var(--text-base);
+  color: var(--color-black);
+}
+
+.setupRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4);
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.field label {
+  font-size: var(--text-xs);
+  font-weight: var(--font-bold);
+  color: var(--color-black);
+}
+
+.input,
+.select {
+  padding: var(--space-3) var(--space-4);
+  background: var(--color-bg);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-md);
+  font-size: var(--text-sm);
+  color: var(--color-black);
+  outline: none;
+}
+
+/* Roster Table Card */
+.rosterTableCard {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-6);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.rosterTableHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: var(--space-3);
+  border-bottom: 1px solid var(--color-border);
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+.rosterTableHeader h3 {
+  font-size: var(--text-base);
+  color: var(--color-black);
+}
+
+.rosterTableHeader span {
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+}
+
+.rosterTableWrapper {
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: var(--text-xs);
+}
+
+.table th {
+  background: var(--color-bg-alt);
+  padding: var(--space-3);
+  font-weight: var(--font-bold);
+  color: var(--color-black);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.table td {
+  padding: var(--space-2) var(--space-3);
+  border-bottom: 1px solid var(--color-border);
+  vertical-align: middle;
+}
+
+.indexCell {
+  font-weight: var(--font-bold);
+  color: var(--color-text-faint);
+  text-align: center;
+}
+
+.rosterInput {
+  width: 100%;
+  padding: var(--space-2) var(--space-3);
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  font-size: var(--text-xs);
+  font-weight: var(--font-bold);
+  color: var(--color-black);
+  outline: none;
+}
+
+.rosterInput:focus {
+  border-color: var(--color-emerald);
+}
+
+.rosterSelect {
+  width: 100%;
+  padding: var(--space-2) var(--space-3);
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  font-size: var(--text-xs);
+  color: var(--color-black);
+  outline: none;
+}
+
+.captainToggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+.deleteRowBtn {
+  color: var(--color-text-faint);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.deleteRowBtn:hover {
+  color: #D32F2F;
+}
+
+/* Sidebar */
+.summarySidebar {
+  position: sticky;
+  top: calc(var(--navbar-height) + var(--space-4));
+}
+
+.summaryCard {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-6);
+  box-shadow: var(--shadow-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.summaryTitle {
+  font-size: var(--text-base);
+  font-weight: var(--font-bold);
+  color: var(--color-black);
+  padding-bottom: var(--space-3);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.summaryRow {
+  display: flex;
+  justify-content: space-between;
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+}
+
+.discountRow {
+  color: #FF3B5C;
+  font-weight: var(--font-bold);
+}
+
+.freeShippingTag {
+  color: var(--color-emerald-dark);
+  font-weight: var(--font-bold);
+}
+
+.totalRow {
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--color-border);
+  font-size: var(--text-base);
+  font-weight: var(--font-bold);
+  color: var(--color-black);
+}
+
+.grandTotal {
+  font-family: var(--font-heading);
+  font-size: 1.4rem;
+  color: var(--color-emerald-dark);
+}
+
+.addCartBtn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  margin-top: var(--space-2);
+}
+
+.teamGuarantees {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--color-border);
+}
+
+.guaranteeRow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  color: var(--color-text-muted);
+}
+
+.guaranteeRow svg {
+  color: var(--color-emerald);
+  flex-shrink: 0;
+}
+
+@media (max-width: 900px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+
+  .tierGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .setupRow {
+    grid-template-columns: 1fr;
+  }
+}
