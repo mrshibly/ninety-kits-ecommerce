@@ -34,3 +34,7 @@ npm-debug.log*
 
 # Backup files
 *.bak
+
+# Internal specs
+instructions.md
+jersey-ecommerce-prd.md
