@@ -221,6 +221,10 @@ interface StoreDataContextType {
   deleteProduct: (productId: string) => void;
   adjustProductStock: (productId: string, delta: number) => void;
   getProductBySlug: (slug: string) => Product | undefined;
+  addProductReview: (
+    productId: string,
+    review: { author: string; city: string; rating: number; comment: string }
+  ) => void;
 
   // Orders CRUD
   orders: StoreOrder[];
@@ -372,6 +376,45 @@ export function StoreDataProvider({ children }: { children: React.ReactNode }) {
     return products.find((p) => p.slug === slug);
   };
 
+  const addProductReview = (
+    productId: string,
+    reviewData: {
+      author: string;
+      city: string;
+      rating: number;
+      comment: string;
+    }
+  ) => {
+    const now = new Date();
+    const formattedDate = `${now.getDate()} ${now.toLocaleString("default", { month: "short" })} ${now.getFullYear()}`;
+    const newReview = {
+      id: `rev-${Date.now()}`,
+      author: reviewData.author.trim() || "Verified Supporter",
+      city: reviewData.city.trim() || "Dhaka",
+      rating: Number(reviewData.rating) || 5,
+      comment: reviewData.comment.trim(),
+      verified: true,
+      date: formattedDate,
+    };
+
+    setProducts((prev) =>
+      prev.map((p) => {
+        if (p.id !== productId && p.slug !== productId) return p;
+        const currentReviews = p.reviews || [];
+        const updatedReviews = [newReview, ...currentReviews];
+        const avgRating =
+          updatedReviews.reduce((sum, r) => sum + r.rating, 0) /
+          updatedReviews.length;
+        return {
+          ...p,
+          reviews: updatedReviews,
+          reviewCount: updatedReviews.length,
+          rating: Number(avgRating.toFixed(1)),
+        };
+      })
+    );
+  };
+
   // --------------------------------------------------------------------------
   // ORDERS CRUD
   // --------------------------------------------------------------------------
@@ -500,6 +543,7 @@ export function StoreDataProvider({ children }: { children: React.ReactNode }) {
         deleteProduct,
         adjustProductStock,
         getProductBySlug,
+        addProductReview,
         orders,
         createOrder,
         updateOrderStatus,
