@@ -17,6 +17,8 @@ import {
   SparklesIcon,
   CheckCircleIcon,
   PlusIcon,
+  EditIcon,
+  TrashIcon,
 } from "@/components/Icons";
 import styles from "./product-detail.module.css";
 import AddToCartSection from "./AddToCartSection";
@@ -27,7 +29,12 @@ export default function ProductDetailPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = use(params);
-  const { getProductBySlug, addProductReview } = useStoreData();
+  const {
+    getProductBySlug,
+    addProductReview,
+    updateProductReview,
+    deleteProductReview,
+  } = useStoreData();
   const { user } = useAuth();
   const product = getProductBySlug(slug);
 
@@ -39,6 +46,16 @@ export default function ProductDetailPage({
   const [city, setCity] = useState("Dhaka");
   const [comment, setComment] = useState("");
   const [reviewNotice, setReviewNotice] = useState(false);
+
+  // Edit Review State
+  const [editingReviewId, setEditingReviewId] = useState<string | null>(null);
+  const [editRating, setEditRating] = useState(5);
+  const [editHoverRating, setEditHoverRating] = useState(0);
+  const [editAuthor, setEditAuthor] = useState("");
+  const [editCity, setEditCity] = useState("");
+  const [editComment, setEditComment] = useState("");
+  const [editNotice, setEditNotice] = useState(false);
+  const [deleteNotice, setDeleteNotice] = useState(false);
 
   useEffect(() => {
     if (user?.name && !authorName) {
@@ -61,6 +78,38 @@ export default function ProductDetailPage({
     setIsWritingReview(false);
     setReviewNotice(true);
     setTimeout(() => setReviewNotice(false), 4000);
+  };
+
+  const startEditReview = (rev: any) => {
+    setEditingReviewId(rev.id);
+    setEditRating(rev.rating);
+    setEditAuthor(rev.author);
+    setEditCity(rev.city);
+    setEditComment(rev.comment);
+  };
+
+  const handleEditSubmit = (e: React.FormEvent, reviewId: string) => {
+    e.preventDefault();
+    if (!editComment.trim()) return;
+
+    updateProductReview(product?.id || slug, reviewId, {
+      author: editAuthor.trim() || "Verified Supporter",
+      city: editCity.trim() || "Dhaka",
+      rating: editRating,
+      comment: editComment.trim(),
+    });
+
+    setEditingReviewId(null);
+    setEditNotice(true);
+    setTimeout(() => setEditNotice(false), 4000);
+  };
+
+  const handleDeleteReview = (reviewId: string) => {
+    if (window.confirm("Are you sure you want to delete this customer review?")) {
+      deleteProductReview(product?.id || slug, reviewId);
+      setDeleteNotice(true);
+      setTimeout(() => setDeleteNotice(false), 4000);
+    }
   };
 
   if (!product) {
@@ -298,6 +347,22 @@ export default function ProductDetailPage({
                 </div>
               )}
 
+              {/* Review Edited Success Alert */}
+              {editNotice && (
+                <div className={styles.reviewSuccessNotice}>
+                  <CheckCircleIcon size={16} />
+                  <span>Your review has been successfully updated!</span>
+                </div>
+              )}
+
+              {/* Review Deleted Success Alert */}
+              {deleteNotice && (
+                <div className={styles.reviewDeleteNotice}>
+                  <TrashIcon size={16} />
+                  <span>Customer review has been permanently deleted by admin.</span>
+                </div>
+              )}
+
               {/* Interactive Write Review Form */}
               {isWritingReview && (
                 <form onSubmit={handleReviewSubmit} className={styles.writeReviewForm}>
@@ -394,39 +459,141 @@ export default function ProductDetailPage({
               {/* Reviews List */}
               <div className={styles.reviewsList}>
                 {product.reviews && product.reviews.length > 0 ? (
-                  product.reviews.map((rev) => (
-                    <div key={rev.id} className={styles.singleReview}>
-                      <div className={styles.reviewHead}>
-                        <div className={styles.reviewerMeta}>
-                          <div className={styles.reviewerAvatar}>
-                            {rev.author.charAt(0).toUpperCase()}
-                          </div>
-                          <div>
-                            <div className={styles.reviewerNameRow}>
-                              <strong>{rev.author}</strong>
-                              <span className={styles.verifiedBadge}>
-                                <BadgeCheckIcon size={13} />
-                                <span>Verified Buyer</span>
-                              </span>
-                            </div>
-                            <span className={styles.reviewCity}>{rev.city} • {rev.date}</span>
-                          </div>
-                        </div>
+                  product.reviews.map((rev) => {
+                    const isOwner = user && (user.name.toLowerCase() === rev.author.toLowerCase() || user.role === "customer");
+                    const isAdmin = user?.role === "admin";
+                    const isEditingThis = editingReviewId === rev.id;
 
-                        <div className={styles.stars}>
-                          {[1, 2, 3, 4, 5].map((s) => (
-                            <StarIcon
-                              key={s}
-                              size={13}
-                              filled={s <= rev.rating}
-                              className={s <= rev.rating ? styles.starFilled : styles.starEmpty}
-                            />
-                          ))}
-                        </div>
+                    return (
+                      <div key={rev.id} className={styles.singleReview}>
+                        {isEditingThis ? (
+                          /* Inline Edit Review Form */
+                          <form
+                            onSubmit={(e) => handleEditSubmit(e, rev.id)}
+                            className={styles.inlineEditForm}
+                          >
+                            <div className={styles.inlineEditHeader}>
+                              <strong>Edit Your Review</strong>
+                              <span className={styles.editAuthorTag}>{rev.author}</span>
+                            </div>
+
+                            {/* Edit Star Rating Picker */}
+                            <div className={styles.ratingPickerGroup}>
+                              <label className={styles.fieldLabel}>RATING</label>
+                              <div className={styles.starsPickerRow}>
+                                {[1, 2, 3, 4, 5].map((star) => (
+                                  <button
+                                    key={star}
+                                    type="button"
+                                    className={styles.starPickerBtn}
+                                    onMouseEnter={() => setEditHoverRating(star)}
+                                    onMouseLeave={() => setEditHoverRating(0)}
+                                    onClick={() => setEditRating(star)}
+                                    aria-label={`${star} Stars`}
+                                  >
+                                    <StarIcon
+                                      size={20}
+                                      filled={star <= (editHoverRating || editRating)}
+                                      className={star <= (editHoverRating || editRating) ? styles.starFilled : styles.starEmpty}
+                                    />
+                                  </button>
+                                ))}
+                                <span className={styles.ratingDescText}>
+                                  {(editHoverRating || editRating)} Star{(editHoverRating || editRating) > 1 ? "s" : ""}
+                                </span>
+                              </div>
+                            </div>
+
+                            <div className={styles.fieldItem}>
+                              <label className={styles.fieldLabel}>UPDATED REVIEW COMMENT</label>
+                              <textarea
+                                rows={2}
+                                required
+                                value={editComment}
+                                onChange={(e) => setEditComment(e.target.value)}
+                                className={styles.reviewTextarea}
+                              />
+                            </div>
+
+                            <div className={styles.reviewFormFooter}>
+                              <button
+                                type="button"
+                                className="btn btn-secondary"
+                                onClick={() => setEditingReviewId(null)}
+                              >
+                                Cancel
+                              </button>
+                              <button type="submit" className="btn btn-primary">
+                                <CheckCircleIcon size={16} />
+                                <span>Save Updated Review</span>
+                              </button>
+                            </div>
+                          </form>
+                        ) : (
+                          /* Normal Review Display */
+                          <>
+                            <div className={styles.reviewHead}>
+                              <div className={styles.reviewerMeta}>
+                                <div className={styles.reviewerAvatar}>
+                                  {rev.author.charAt(0).toUpperCase()}
+                                </div>
+                                <div>
+                                  <div className={styles.reviewerNameRow}>
+                                    <strong>{rev.author}</strong>
+                                    <span className={styles.verifiedBadge}>
+                                      <BadgeCheckIcon size={13} />
+                                      <span>Verified Buyer</span>
+                                    </span>
+                                  </div>
+                                  <span className={styles.reviewCity}>{rev.city} • {rev.date}</span>
+                                </div>
+                              </div>
+
+                              <div className={styles.reviewHeadRight}>
+                                <div className={styles.stars}>
+                                  {[1, 2, 3, 4, 5].map((s) => (
+                                    <StarIcon
+                                      key={s}
+                                      size={13}
+                                      filled={s <= rev.rating}
+                                      className={s <= rev.rating ? styles.starFilled : styles.starEmpty}
+                                    />
+                                  ))}
+                                </div>
+
+                                {/* Review Actions: Customer Edit & Admin Delete */}
+                                <div className={styles.reviewActionBtns}>
+                                  {isOwner && (
+                                    <button
+                                      type="button"
+                                      className={styles.reviewEditBtn}
+                                      onClick={() => startEditReview(rev)}
+                                      title="Edit Your Review"
+                                    >
+                                      <EditIcon size={12} />
+                                      <span>Edit</span>
+                                    </button>
+                                  )}
+                                  {isAdmin && (
+                                    <button
+                                      type="button"
+                                      className={styles.reviewDeleteBtn}
+                                      onClick={() => handleDeleteReview(rev.id)}
+                                      title="Admin: Delete Review"
+                                    >
+                                      <TrashIcon size={12} />
+                                      <span>Delete</span>
+                                    </button>
+                                  )}
+                                </div>
+                              </div>
+                            </div>
+                            <p className={styles.reviewComment}>&ldquo;{rev.comment}&rdquo;</p>
+                          </>
+                        )}
                       </div>
-                      <p className={styles.reviewComment}>&ldquo;{rev.comment}&rdquo;</p>
-                    </div>
-                  ))
+                    );
+                  })
                 ) : (
                   <div className={styles.emptyReviews}>
                     <p>No customer reviews yet. Be the first verified supporter to review this official jersey!</p>

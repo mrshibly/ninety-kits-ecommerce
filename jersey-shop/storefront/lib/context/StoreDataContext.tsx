@@ -223,8 +223,14 @@ interface StoreDataContextType {
   getProductBySlug: (slug: string) => Product | undefined;
   addProductReview: (
     productId: string,
-    review: { author: string; city: string; rating: number; comment: string }
+    review: { author: string; city: string; rating: number; comment: string; userId?: string }
   ) => void;
+  updateProductReview: (
+    productId: string,
+    reviewId: string,
+    updatedData: { rating: number; comment: string; author?: string; city?: string }
+  ) => void;
+  deleteProductReview: (productId: string, reviewId: string) => void;
 
   // Orders CRUD
   orders: StoreOrder[];
@@ -415,6 +421,65 @@ export function StoreDataProvider({ children }: { children: React.ReactNode }) {
     );
   };
 
+  const updateProductReview = (
+    productId: string,
+    reviewId: string,
+    updatedData: {
+      rating: number;
+      comment: string;
+      author?: string;
+      city?: string;
+    }
+  ) => {
+    setProducts((prev) =>
+      prev.map((p) => {
+        if (p.id !== productId && p.slug !== productId) return p;
+        const currentReviews = p.reviews || [];
+        const updatedReviews = currentReviews.map((r) =>
+          r.id === reviewId
+            ? {
+                ...r,
+                rating: Number(updatedData.rating) || r.rating,
+                comment: updatedData.comment.trim() || r.comment,
+                ...(updatedData.author ? { author: updatedData.author.trim() } : {}),
+                ...(updatedData.city ? { city: updatedData.city.trim() } : {}),
+              }
+            : r
+        );
+        const avgRating =
+          updatedReviews.length > 0
+            ? updatedReviews.reduce((sum, r) => sum + r.rating, 0) / updatedReviews.length
+            : 5.0;
+        return {
+          ...p,
+          reviews: updatedReviews,
+          reviewCount: updatedReviews.length,
+          rating: Number(avgRating.toFixed(1)),
+        };
+      })
+    );
+  };
+
+  const deleteProductReview = (productId: string, reviewId: string) => {
+    setProducts((prev) =>
+      prev.map((p) => {
+        if (p.id !== productId && p.slug !== productId) return p;
+        const currentReviews = p.reviews || [];
+        const updatedReviews = currentReviews.filter((r) => r.id !== reviewId);
+        const avgRating =
+          updatedReviews.length > 0
+            ? updatedReviews.reduce((sum, r) => sum + r.rating, 0) / updatedReviews.length
+            : 5.0;
+        return {
+          ...p,
+          reviews: updatedReviews,
+          reviewCount: updatedReviews.length,
+          rating: Number(avgRating.toFixed(1)),
+        };
+      })
+    );
+  };
+
   // --------------------------------------------------------------------------
   // ORDERS CRUD
   // --------------------------------------------------------------------------
@@ -544,6 +609,8 @@ export function StoreDataProvider({ children }: { children: React.ReactNode }) {
         adjustProductStock,
         getProductBySlug,
         addProductReview,
+        updateProductReview,
+        deleteProductReview,
         orders,
         createOrder,
         updateOrderStatus,
