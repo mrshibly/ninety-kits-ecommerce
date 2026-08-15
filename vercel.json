@@ -1,6 +1,0 @@
-{
-  "framework": "nextjs",
-  "buildCommand": "cd jersey-shop/storefront && npm run build",
-  "outputDirectory": "jersey-shop/storefront/.next",
-  "installCommand": "cd jersey-shop/storefront && npm install"
-}
