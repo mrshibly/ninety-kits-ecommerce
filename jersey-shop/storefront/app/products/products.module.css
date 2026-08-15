@@ -451,14 +451,30 @@
 }
 
 @media (max-width: 768px) {
+  .header {
+    padding: var(--space-8) 0 var(--space-6);
+  }
+
+  .title {
+    font-size: 2rem;
+  }
+
   .layout {
     flex-direction: column;
+    gap: var(--space-6);
   }
 
   .filters {
     width: 100%;
   }
 
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+}
+
+@media (max-width: 360px) {
   .grid {
     grid-template-columns: 1fr;
   }

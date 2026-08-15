@@ -683,20 +683,50 @@
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   .heroBanner {
-    height: 65vh;
+    height: 70vh;
+    min-height: 520px;
+    padding-bottom: var(--space-8);
   }
 
   .heroMainTitle {
-    font-size: 2.4rem;
+    font-size: clamp(2.2rem, 8vw, 3.2rem);
+  }
+
+  .heroButtonRow {
+    gap: 8px;
+    width: 100%;
+  }
+
+  .heroSolidBtn, .heroOutlineBtn {
+    flex: 1 1 calc(50% - 4px);
+    text-align: center;
+    padding: 10px 14px;
+    font-size: 11px;
   }
 
   .fourGrid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
   }
 
   .customStudioBanner {
-    padding: var(--space-6);
+    padding: var(--space-6) var(--space-4);
+  }
+
+  .bannerTitle {
+    font-size: 1.8rem;
+  }
+}
+
+@media (max-width: 420px) {
+  .heroSolidBtn, .heroOutlineBtn {
+    flex: 1 1 100%;
+  }
+
+  .fourGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
   }
 }

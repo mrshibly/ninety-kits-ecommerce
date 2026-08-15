@@ -1217,3 +1217,47 @@
     grid-template-columns: 1fr;
   }
 }
+
+@media (max-width: 640px) {
+  .title {
+    font-size: 1.6rem;
+  }
+
+  .actionsRow {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--space-3);
+  }
+
+  .quantityControl {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .addToBagBtn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .customizerPreviewCard {
+    padding: var(--space-4);
+  }
+
+  .customInputRow {
+    flex-direction: column;
+  }
+
+  .reviewHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .reviewFormGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .trustPerksRow {
+    grid-template-columns: 1fr;
+  }
+}
