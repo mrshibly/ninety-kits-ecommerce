@@ -48,6 +48,8 @@ interface AuthContextType {
   logout: () => void;
   register: (name: string, email: string, phone: string) => boolean;
   updateProfile: (data: Partial<User>) => void;
+  addOrderToUser: (order: UserOrder) => void;
+  addAddress: (address: Omit<UserAddress, "id">) => void;
 }
 
 const DEMO_CUSTOMER: User = {
@@ -173,6 +175,29 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     localStorage.setItem("ninetykits_auth_user", JSON.stringify(updated));
   };
 
+  const addOrderToUser = (order: UserOrder) => {
+    if (!user) return;
+    const updatedOrders = [order, ...(user.orders || [])];
+    const updated = { ...user, orders: updatedOrders };
+    setUser(updated);
+    localStorage.setItem("ninetykits_auth_user", JSON.stringify(updated));
+  };
+
+  const addAddress = (address: Omit<UserAddress, "id">) => {
+    if (!user) return;
+    const newAddr: UserAddress = {
+      ...address,
+      id: `addr-${Date.now().toString().slice(-4)}`,
+    };
+    const currentAddresses = user.addresses || [];
+    const updatedAddresses = address.isDefault
+      ? currentAddresses.map((a) => ({ ...a, isDefault: false })).concat(newAddr)
+      : currentAddresses.concat(newAddr);
+    const updated = { ...user, addresses: updatedAddresses };
+    setUser(updated);
+    localStorage.setItem("ninetykits_auth_user", JSON.stringify(updated));
+  };
+
   return (
     <AuthContext.Provider
       value={{
@@ -183,6 +208,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         logout,
         register,
         updateProfile,
+        addOrderToUser,
+        addAddress,
       }}
     >
       {children}

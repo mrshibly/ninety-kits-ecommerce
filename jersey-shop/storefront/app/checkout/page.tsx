@@ -1,9 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useCart } from "@/lib/context/CartContext";
 import { useStoreData } from "@/lib/context/StoreDataContext";
+import { useAuth } from "@/lib/context/AuthContext";
 import { useLanguage } from "@/lib/context/LanguageContext";
 import {
   TruckIcon,
@@ -42,6 +43,7 @@ const BD_DIVISIONS = [
 export default function CheckoutPage() {
   const { items, subtotal, clearCart } = useCart();
   const { createOrder, settings } = useStoreData();
+  const { user, addOrderToUser } = useAuth();
   const { t } = useLanguage();
 
   const [step, setStep] = useState<1 | 2 | 3>(1);
@@ -61,12 +63,27 @@ export default function CheckoutPage() {
     agreeSms: true,
   });
 
+  useEffect(() => {
+    if (user && !form.fullName) {
+      const defaultAddr = user.addresses?.find((a) => a.isDefault) || user.addresses?.[0];
+      setForm((prev) => ({
+        ...prev,
+        fullName: user.name || prev.fullName,
+        phone: user.phone || prev.phone,
+        email: user.email || prev.email,
+        address: defaultAddr ? defaultAddr.address : prev.address,
+        district: defaultAddr ? defaultAddr.district : prev.district,
+        division: defaultAddr ? defaultAddr.division : prev.division,
+      }));
+    }
+  }, [user]);
+
   const shippingCost =
     subtotal >= (settings.freeShippingThreshold || 5000)
       ? 0
       : deliveryArea === "dhaka"
-      ? settings.shippingInsideDhaka || 60
-      : settings.shippingOutsideDhaka || 120;
+      ? settings.shippingInsideDhaka || 80
+      : settings.shippingOutsideDhaka || 130;
   const orderTotal = subtotal + shippingCost;
 
   const updateForm = (field: string, value: any) => {
@@ -74,7 +91,7 @@ export default function CheckoutPage() {
   };
 
   const handlePlaceOrder = () => {
-    const itemsSummary = items.map((i) => `${i.productName} (Size ${i.size})`).join(", ");
+    const itemsSummary = items.map((i) => `${i.name} (Size ${i.size})`).join(", ");
     const customSummary = items
       .filter((i) => i.customName || i.customNumber)
       .map((i) => `Name: ${i.customName || ""} | No: ${i.customNumber || ""}`)
@@ -100,13 +117,14 @@ export default function CheckoutPage() {
       division: form.division || "Dhaka",
       items: itemsSummary || "Sports Jersey Matchwear",
       itemDetails: items.map((i) => ({
-        name: i.productName,
+        name: i.name,
         size: i.size,
         quantity: i.quantity,
         price: i.price,
         customName: i.customName,
         customNumber: i.customNumber,
         team: i.team,
+        productId: i.productId,
       })),
       customDetail: customSummary || undefined,
       total: orderTotal,
@@ -114,6 +132,25 @@ export default function CheckoutPage() {
       status: paymentMethod === "cod" ? "Pending COD" : "Printing Queue",
       courier: deliveryArea === "dhaka" ? "Pathao Express" : "Steadfast Courier",
     });
+
+    if (user) {
+      addOrderToUser({
+        id: created.id,
+        date: created.date,
+        items: items.map((i) => ({
+          name: i.name,
+          size: i.size,
+          quantity: i.quantity,
+          price: i.price,
+          customName: i.customName,
+          customNumber: i.customNumber,
+        })),
+        total: orderTotal,
+        paymentMethod: pmLabel,
+        status: paymentMethod === "cod" ? "Pending COD" : "Printing",
+        trackingNumber: created.trackingNumber,
+      });
+    }
 
     setOrderId(created.id);
     setOrderPlaced(true);
@@ -142,6 +179,13 @@ export default function CheckoutPage() {
 
   // Order Confirmed Success Screen
   if (orderPlaced) {
+    const merchantNum =
+      paymentMethod === "bkash"
+        ? settings.merchantBkashNumber || "01800-909090"
+        : paymentMethod === "nagad"
+        ? settings.merchantNagadNumber || "01800-909090"
+        : settings.merchantRocketNumber || "01800-909090";
+
     return (
       <div className={styles.page}>
         <div className="container">
@@ -191,7 +235,7 @@ export default function CheckoutPage() {
                   <PhoneIcon size={16} /> Merchant Payment Instructions:
                 </h4>
                 <p>
-                  Please send <strong>৳{orderTotal.toLocaleString()}</strong> via {paymentMethod.toUpperCase()} Merchant Make Payment / Send Money to <strong>01800-909090</strong> (Reference: <strong>{orderId}</strong>).
+                  Please send <strong>৳{orderTotal.toLocaleString()}</strong> via {paymentMethod.toUpperCase()} Merchant Make Payment / Send Money to <strong>{merchantNum}</strong> (Reference: <strong>{orderId}</strong>).
                 </p>
               </div>
             )}

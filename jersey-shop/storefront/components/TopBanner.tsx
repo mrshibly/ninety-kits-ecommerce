@@ -3,16 +3,21 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useLanguage } from "@/lib/context/LanguageContext";
+import { useStoreData } from "@/lib/context/StoreDataContext";
 import { TruckIcon, ShieldCheckIcon, PackageIcon, PhoneIcon, GlobeIcon, BdFlagIcon, ArrowRightIcon } from "@/components/Icons";
 import styles from "./TopBanner.module.css";
 
 export default function TopBanner() {
   const { language, setLanguage } = useLanguage();
+  const { settings } = useStoreData();
   const pathname = usePathname();
 
   if (pathname?.startsWith("/admin")) {
     return null;
   }
+
+  const helpline = settings.supportHelpline || "+880 1800-909090";
+  const threshold = settings.freeShippingThreshold || 5000;
 
   return (
     <div className={styles.bannerWrapper} id="top-announcement-system">
@@ -21,7 +26,7 @@ export default function TopBanner() {
         <div className={`container ${styles.utilityContainer}`}>
           <div className={styles.leftMessage}>
             <TruckIcon size={14} className={styles.accentIcon} />
-            <span>FREE DELIVERY ACROSS BANGLADESH ON ORDERS OVER ৳5,000</span>
+            <span>FREE DELIVERY ACROSS BANGLADESH ON ORDERS OVER ৳{threshold.toLocaleString()}</span>
           </div>
 
           <div className={styles.rightLinks}>
@@ -30,9 +35,9 @@ export default function TopBanner() {
               <span>Track Order</span>
             </Link>
             <span className={styles.pipe}>|</span>
-            <a href="tel:+8801800909090" className={`${styles.utilityLink} ${styles.hideMobile}`}>
+            <a href={`tel:${helpline.replace(/\s+/g, "")}`} className={`${styles.utilityLink} ${styles.hideMobile}`}>
               <PhoneIcon size={13} />
-              <span>Helpline: +880 1800-909090</span>
+              <span>Helpline: {helpline}</span>
             </a>
             <span className={`${styles.pipe} ${styles.hideMobile}`}>|</span>
             {/* Language Switch */}

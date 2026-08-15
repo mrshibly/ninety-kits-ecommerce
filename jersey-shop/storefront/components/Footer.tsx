@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useStoreData } from "@/lib/context/StoreDataContext";
 import {
   BoltIcon,
   FacebookIcon,
@@ -24,11 +25,14 @@ import styles from "./Footer.module.css";
 export default function Footer() {
   const [email, setEmail] = useState("");
   const [subscribed, setSubscribed] = useState(false);
+  const { settings } = useStoreData();
   const pathname = usePathname();
 
   if (pathname?.startsWith("/admin")) {
     return null;
   }
+
+  const helpline = settings.supportHelpline || "+880 1800-909090";
 
   const handleSubscribe = (e: React.FormEvent) => {
     e.preventDefault();
@@ -80,7 +84,7 @@ export default function Footer() {
             <Link href="/about" className={styles.link}>Delivery &amp; Shipping</Link>
             <Link href="/about" className={styles.link}>7-Day Size Exchange</Link>
             <Link href="/team-orders" className={styles.link}>Team Orders</Link>
-            <a href="tel:+8801800909090" className={styles.link}>Helpline: +880 1800-909090</a>
+            <a href={`tel:${helpline.replace(/\s+/g, "")}`} className={styles.link}>Helpline: {helpline}</a>
           </div>
 
           {/* Column 3: About */}

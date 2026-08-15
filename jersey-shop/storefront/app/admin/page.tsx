@@ -185,6 +185,7 @@ export default function AdminDashboardPage() {
       sizes: ["S", "M", "L", "XL", "XXL"],
       stockCount: 50,
       isCustomizable: true,
+      image: "/images/brazil_kit.jpg",
       description: "Premium match jersey engineered with breathable moisture-wicking technology.",
     });
   };

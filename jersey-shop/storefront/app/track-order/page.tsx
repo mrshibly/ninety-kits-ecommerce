@@ -30,7 +30,7 @@ interface TrackingResult {
 }
 
 export default function TrackOrderPage() {
-  const { getOrderById } = useStoreData();
+  const { getOrderById, settings } = useStoreData();
   const [queryOrderId, setQueryOrderId] = useState("");
   const [queryPhone, setQueryPhone] = useState("");
   const [loading, setLoading] = useState(false);
@@ -39,14 +39,15 @@ export default function TrackOrderPage() {
 
   const handleTrack = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!queryOrderId.trim()) return;
+    const searchTarget = queryOrderId.trim() || queryPhone.trim();
+    if (!searchTarget) return;
 
     setLoading(true);
     setSearched(true);
 
     setTimeout(() => {
       setLoading(false);
-      const found = getOrderById(queryOrderId);
+      const found = getOrderById(searchTarget);
 
       if (found) {
         const stepMap = {
@@ -258,7 +259,7 @@ export default function TrackOrderPage() {
                 </div>
                 <div className={styles.supportNote}>
                   <ShieldCheckIcon size={16} />
-                  <span>Need urgent delivery support? Call WhatsApp Hotline <strong>+880 1700-000000</strong></span>
+                  <span>Need urgent delivery support? Call WhatsApp Hotline <strong>{settings.supportHelpline || "+880 1800-909090"}</strong></span>
                 </div>
               </div>
             </div>

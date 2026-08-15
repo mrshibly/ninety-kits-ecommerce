@@ -48,6 +48,12 @@ export interface StoreSettings {
   shippingOutsideDhaka: number;
   freeShippingThreshold: number;
   customizationFee: number;
+  storePhone?: string;
+  supportEmail?: string;
+  supportHelpline?: string;
+  merchantBkashNumber?: string;
+  merchantNagadNumber?: string;
+  merchantRocketNumber?: string;
 }
 
 export interface HeroBannerConfig {
@@ -65,10 +71,16 @@ const DEFAULT_HERO_BANNER: HeroBannerConfig = {
 };
 
 const DEFAULT_SETTINGS: StoreSettings = {
-  shippingInsideDhaka: 60,
-  shippingOutsideDhaka: 120,
+  shippingInsideDhaka: 80,
+  shippingOutsideDhaka: 130,
   freeShippingThreshold: 5000,
   customizationFee: 200,
+  storePhone: "+880 1800-909090",
+  supportEmail: "support@ninetykits.com",
+  supportHelpline: "+880 1800-909090",
+  merchantBkashNumber: "01800-909090",
+  merchantNagadNumber: "01800-909090",
+  merchantRocketNumber: "01800-909090",
 };
 
 const DEFAULT_ORDERS: StoreOrder[] = [
@@ -244,6 +256,7 @@ interface StoreDataContextType {
   addVoucher: (voucherData: Omit<Voucher, "id" | "usageCount">) => Voucher;
   toggleVoucher: (voucherId: string) => void;
   deleteVoucher: (voucherId: string) => void;
+  incrementVoucherUsage: (code: string) => void;
   validateVoucher: (code: string, subtotal: number) => { valid: boolean; discountAmount: number; message: string };
 
   // Store Settings
@@ -495,6 +508,24 @@ export function StoreDataProvider({ children }: { children: React.ReactNode }) {
       trackingNumber: orderData.trackingNumber || `PTH-${orderId.replace("NK-", "")}-BD`,
     };
 
+    // Auto-decrement inventory for purchased items
+    if (orderData.itemDetails && orderData.itemDetails.length > 0) {
+      orderData.itemDetails.forEach((item) => {
+        const itemObj = item as any;
+        if (itemObj.productId) {
+          adjustProductStock(itemObj.productId, -(item.quantity || 1));
+        } else {
+          // If productId not explicitly stored, match product by name
+          const matchedProd = products.find(
+            (p) => p.name.toLowerCase() === item.name.toLowerCase()
+          );
+          if (matchedProd) {
+            adjustProductStock(matchedProd.id, -(item.quantity || 1));
+          }
+        }
+      });
+    }
+
     setOrders((prev) => [newOrder, ...prev]);
     return newOrder;
   };
@@ -521,10 +552,21 @@ export function StoreDataProvider({ children }: { children: React.ReactNode }) {
     setOrders((prev) => prev.filter((ord) => ord.id !== orderId));
   };
 
-  const getOrderById = (orderId: string): StoreOrder | undefined => {
-    return orders.find(
-      (o) => o.id.toLowerCase() === orderId.trim().toLowerCase()
-    );
+  const getOrderById = (query: string): StoreOrder | undefined => {
+    if (!query) return undefined;
+    const cleanQuery = query.trim().toLowerCase();
+    const digitsQuery = cleanQuery.replace(/\D/g, "");
+
+    return orders.find((o) => {
+      const idMatch = o.id.toLowerCase() === cleanQuery;
+      const trackingMatch =
+        o.trackingNumber && o.trackingNumber.toLowerCase() === cleanQuery;
+      const phoneMatch =
+        digitsQuery.length >= 6 &&
+        o.phone &&
+        o.phone.replace(/\D/g, "").includes(digitsQuery);
+      return idMatch || trackingMatch || phoneMatch;
+    });
   };
 
   // --------------------------------------------------------------------------
@@ -550,45 +592,52 @@ export function StoreDataProvider({ children }: { children: React.ReactNode }) {
     setVouchers((prev) => prev.filter((v) => v.id !== voucherId));
   };
 
+  const incrementVoucherUsage = (code: string) => {
+    if (!code) return;
+    setVouchers((prev) =>
+      prev.map((v) =>
+        v.code.toLowerCase() === code.trim().toLowerCase()
+          ? { ...v, usageCount: (v.usageCount || 0) + 1 }
+          : v
+      )
+    );
+  };
+
   const validateVoucher = (
     code: string,
     subtotal: number
   ): { valid: boolean; discountAmount: number; message: string } => {
-    const normalized = code.trim().toUpperCase();
-    const found = vouchers.find((v) => v.code === normalized);
+    const voucher = vouchers.find(
+      (v) => v.code.toLowerCase() === code.trim().toLowerCase()
+    );
 
-    if (!found) {
-      return { valid: false, discountAmount: 0, message: "Invalid voucher code." };
+    if (!voucher) {
+      return { valid: false, discountAmount: 0, message: "Invalid voucher code" };
     }
 
-    if (!found.isActive) {
-      return { valid: false, discountAmount: 0, message: "This voucher code has been disabled." };
+    if (!voucher.isActive) {
+      return { valid: false, discountAmount: 0, message: "This voucher has expired or is inactive" };
     }
 
-    if (subtotal < found.minSpend) {
+    if (subtotal < voucher.minSpend) {
       return {
         valid: false,
         discountAmount: 0,
-        message: `Minimum spend of ৳${found.minSpend.toLocaleString()} required for this code.`,
+        message: `Minimum order amount of ৳${voucher.minSpend.toLocaleString()} required`,
       };
     }
 
     let discountAmount = 0;
-    if (found.type === "percentage") {
-      discountAmount = Math.round((subtotal * found.value) / 100);
+    if (voucher.type === "percentage") {
+      discountAmount = Math.round((subtotal * voucher.value) / 100);
     } else {
-      discountAmount = found.value;
+      discountAmount = voucher.value;
     }
-
-    // Increment usage count
-    setVouchers((prev) =>
-      prev.map((v) => (v.id === found.id ? { ...v, usageCount: v.usageCount + 1 } : v))
-    );
 
     return {
       valid: true,
       discountAmount,
-      message: `Voucher applied: ${found.type === "percentage" ? `${found.value}% OFF` : `৳${found.value} OFF`}`,
+      message: `Voucher applied: ${voucher.type === "percentage" ? `${voucher.value}% OFF` : `৳${voucher.value} OFF`}`,
     };
   };
 
@@ -620,6 +669,7 @@ export function StoreDataProvider({ children }: { children: React.ReactNode }) {
         addVoucher,
         toggleVoucher,
         deleteVoucher,
+        incrementVoucherUsage,
         validateVoucher,
         settings,
         updateSettings,

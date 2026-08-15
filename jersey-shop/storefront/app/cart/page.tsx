@@ -297,7 +297,7 @@ export default function CartPage() {
                             className={styles.voucherChip}
                             onClick={() => applyVoucherCode(vch.code)}
                           >
-                            🏷️ <strong>{vch.code}</strong> ({vch.type === "fixed" ? `৳${vch.value} OFF` : `${vch.value}% OFF`})
+                            🏷️ <strong>{vch.code}</strong> ({vch.type === "flat" ? `৳${vch.value} OFF` : `${vch.value}% OFF`})
                           </button>
                         ))}
                       </div>

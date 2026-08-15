@@ -150,7 +150,7 @@ export default function CustomerAccountPage() {
                               ? styles.statusDelivered
                               : ord.status === "Printing Queue"
                               ? styles.statusPrinting
-                              : ord.status === "Dispatched / Courier Transit"
+                              : ord.status === "Dispatched"
                               ? styles.statusShipped
                               : ""
                           }`}
